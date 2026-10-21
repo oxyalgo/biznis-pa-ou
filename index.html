@@ -140,6 +140,10 @@
     .row.rev{grid-template-columns:1.1fr 1fr}
     .row.rev .copy{order:2}
   }
+
+  .langbtn{font-weight:700;font-size:13px;background:transparent;color:var(--txt);border:1px solid var(--line);padding:8px 12px;border-radius:999px;cursor:pointer;margin-right:10px;font-family:inherit}
+  .langbtn b{color:var(--gold)}
+  .navr{display:flex;align-items:center}
 </style>
 </head>
 <body>
@@ -148,7 +152,7 @@
 <nav>
   <div class="nav-in">
     <div class="brand"><span class="dot"></span>AMUN</div>
-    <a class="nav-cta" href="https://instagram.com/amunsuled" target="_blank" rel="noopener">Pale ak Amun</a>
+    <div class="navr"><button class="langbtn" id="langbtn" onclick="setLang(L==='ht'?'en':'ht')" aria-label="Language"></button><a class="nav-cta" href="https://instagram.com/amunsuled" target="_blank" rel="noopener">Pale ak Amun</a></div>
   </div>
 </nav>
 
@@ -330,11 +334,45 @@
   function cp(){
     var t=document.getElementById('freelink').innerText;
     navigator.clipboard && navigator.clipboard.writeText(t);
-    var b=document.querySelector('.copybtn'); var o=b.innerText; b.innerText='Kopye! ✓';
+    var b=document.querySelector('.copybtn'); var o=b.innerText; b.innerText=(L==='en'?'Copied! ✓':'Kopye! ✓');
     setTimeout(function(){b.innerText=o;},1600);
   }
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+
+<script>
+  // English / Kreyòl toggle. Creole is the source text; EN is a dictionary over text nodes.
+  var EN = {"Pale ak Amun": "Talk to Amun", "🇭🇹 Yon plan ki fèt espesyalman pou ou": "🇭🇹 A plan made just for you", "Sispann vann pik": "Stop selling picks", "youn pa youn": "one by one", "sou Zelle.": "on Zelle.", "Bati yon machin k ap peye w pandan w ap dòmi.": "Build a machine that pays you while you sleep.", "Ou gen talan an deja. Ann fè pik ou yo tounen yon vrè biznis ki mache pou kont li.": "You already have the talent. Let's turn your picks into a real business that runs by itself.", "Gade kijan l mache →": "See how it works →", "Konbyen lajan?": "How much money?", "Kote ou ye kounye a": "Where you are now", "Kounye a, ou fè tout bagay ak men ou": "Right now, you do everything by hand", "Ou oblije kouri dèyè chak moun pou yo peye.": "You have to chase every person to get paid.", "Ou voye menm mesaj la ankò e ankò.": "You send the same message again and again.", "Ou eseye sonje kiyès ki peye, kiyès ki poko.": "You try to remember who paid and who didn't.", "Sa pran tout tan ou. Li fatigan. Epi li pa ka grandi.": "It takes all your time. It's tiring. And it can't grow.", "Kote ou ka ye nan kèk mwa": "Where you can be in a few months", "Imajine sa": "Imagine this", "Ou gen yon sèl gwoup. Ou voye yon sèl mesaj.": "You have one group. You send one message.", "Tout moun ki peye resevwa l menm kote a.": "Everyone who paid gets it at the same time.", "Lajan an antre pou kont li. Moun ki sispann peye, sistèm nan retire yo pou kont li. Ou pa kouri dèyè pèsòn. Ou jis voye pi bon pik ou yo —": "The money comes in by itself. People who stop paying get removed by the system. You chase nobody. You just send your best picks —", "epi ou gade lajan ou ap grandi.": "and watch your money grow.", "Kijan machin nan mache": "How the machine works", "Kat etap senp, epi li mache pou kont li": "Four simple steps, and it runs by itself", "Yon manm peye yon fwa chak mwa (ak yon kat, oswa ak kach).": "A member pays once a month (with a card, or with cash).", "Sistèm nan mete l nan gwoup ou a otomatikman.": "The system adds them to your group automatically.", "Ou poste pik ou yo — epi tout moun ki peye resevwa yo.": "You post your picks — and everyone who paid gets them.", "Chak mwa, lajan an antre ankò. Moun ki sispann peye soti pou kont yo.": "Every month, the money comes in again. People who stop paying leave by themselves.", "Gade konbyen lajan ki nan sa": "See how much money is in this", "Sa yo se vrè gwoup, ak vrè chif": "These are real groups, with real numbers", "Yon sèl gwoup pik (Bravo Six) fè kòb sa a sou Whop.": "One picks group (Bravo Six) made this much on Whop.", "Sa gwoup pik espòtif yo fè chak mwa sou yon sèl platfòm.": "What sports picks groups make every month on one platform.", "Sa Whop deja peye moun ki gen gwoup.": "What Whop has already paid out to group owners.", "Sa yon moun ki gen yon gwoup fè an mwayèn chak mwa.": "What the average group owner makes each month.", "Yon gwoup (United Kings) gen kantite manm sa a k ap peye $199 pa mwa.": "One group (United Kings) has this many members paying $199 a month.", "Gwoup trading se kategori #1 sou Whop — $19.9 milyon chak mwa.": "Trading groups are the #1 category on Whop — $19.9 million a month.", "/mwa": "/mo", "Sa yo se vrè chif piblik. Tout moun pa fè otan. Men li montre sa ki posib lè ou gen yon bon sistèm ak bon jan pik.": "These are real public numbers. Not everyone makes this much. But it shows what's possible with a good system and good picks.", "Poukisa SE OU ki ka fè sa": "Why YOU can do this", "Ou gen sa ki pi enpòtan an deja": "You already have the most important part", "Ou gen talan an. Ou gen moun ki fè ou konfyans. Ou deja ap vann pik.": "You have the talent. You have people who trust you. You already sell picks.", "Sèl bagay ki manke se sistèm nan.": "The only thing missing is the system.", "Se pati sa a mwen ba ou.": "That's the part I give you.", "Kijan pou kòmanse": "How to start", "Senk etap fasil": "Five easy steps", "Chwazi non gwoup ou ak pri pa mwa (egzanp: $30 oswa $50 pa mwa).": "Pick your group name and monthly price (example: $30 or $50 a month).", "Voye enfòmasyon ou ban mwen (gade lis ki anba a).": "Send me your info (see the list below).", "M ap bati tout sistèm nan pou ou — gwoup la, peman an, tout bagay.": "I build the whole system for you — the group, the payments, everything.", "Ou kòmanse poste pik ou yo nan gwoup la.": "You start posting your picks in the group.", "Moun peye, yo antre pou kont yo, epi ou resevwa lajan ou.": "People pay, they get in by themselves, and you get your money.", "Sa mwen ofri ou": "What I offer you", "M ap bati tout bagay la pou ou": "I'll build everything for you", "GRATIS POU KÒMANSE": "FREE TO START", "Mwen rele": "My name is", ". Mwen se Ayisyen, menm jan ak ou. Mwen bati sistèm sa yo. M ap bati tout bagay pou ou.": ". I'm Haitian, just like you. I build these systems. I'll build everything for you.", "Ou peye m sèlman lè lajan an kòmanse antre.": "You pay me only when the money starts coming in.", "Si ou pa fè kòb, ou pa dwe m anyen. Mwen kwè nan ou. 🇭🇹": "If you don't make money, you owe me nothing. I believe in you. 🇭🇹", "Lè li pare": "When it's ready", "Lyen pou moun ki peye ou kach oswa Zelle": "A link for people who pay you cash or Zelle", "Lè gwoup ou a pare, w ap gen yon lyen espesyal. Lè yon moun peye ou ak kach oswa Zelle, ou ba li lyen sa a. Li klike sou li, li mete imèl li, epi li antre nan gwoup la": "When your group is ready, you'll have a special link. When someone pays you cash or Zelle, you give them this link. They tap it, enter their email, and they're in the group", "GRATIS": "FREE", ". Aksè li a ap dire 30 jou. Apre 30 jou, si li pa peye ankò, sistèm nan retire l pou kont li.": ". Their access lasts 30 days. After 30 days, if they don't pay again, the system removes them by itself.", "Kopye": "Copy", "Sa a se yon egzanp k ap mache. Gwoup": "This is a working example.", "PA OU": "YOUR", "a ap gen pwòp lyen pa l, menm jan an.": "group will have its own link, just like this.", "Sa m bezwen nan men ou pou m kòmanse": "What I need from you to start", "Voye bagay sa yo ban mwen epi m ap mete men": "Send me these and I'll get to work", "Non gwoup ou a": "Your group name", "Sou ki sa gwoup la ye (espò, trading, eltr.)": "What the group is about (sports, trading, etc.)", "Pri pa mwa a ($30? $50?)": "Monthly price ($30? $50?)", "Konbyen fwa w ap poste": "How often you'll post", "Lyen rezo sosyal ou yo": "Your social media links", "Logo ou (si ou genyen youn)": "Your logo (if you have one)", "Kijan ou vle resevwa lajan ou": "How you want to receive your money", "Imèl ou ak nimewo telefòn ou": "Your email and phone number", "Voye repons ou yo ban mwen sou Instagram, oswa nenpòt nan lyen ki anba yo.": "Send me your answers on Instagram, or any of the links below.", "Kontakte Amun": "Contact Amun", "Ann bati sa": "Let's build this", "ansanm": "together", "Mwen pare lè ou pare. Jwenn mwen la:": "I'm ready when you are. Find me here:", "Bati ak lanmou pa": "Built with love by", "— pou yon zanmi Ayisyen ki gen talan.": "— for a talented Haitian friend.", "Wè lajan an": "See the money"};
+  var HT = {}; Object.keys(EN).forEach(function(k){ HT[EN[k]] = k; });
+  var TITLES = {"ht": "AMUN — Bati Biznis Pa Ou", "en": "AMUN — Build Your Own Business"};
+  var L = 'ht';
+  function swapText(map){
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    var n; while ((n = w.nextNode())) {
+      if (n.parentNode && (n.parentNode.tagName === 'SCRIPT' || n.parentNode.tagName === 'STYLE')) continue;
+      var raw = n.nodeValue, t = raw.trim();
+      if (!t || !(t in map)) continue;
+      var lead = raw.slice(0, raw.indexOf(t)), trail = raw.slice(raw.indexOf(t) + t.length);
+      n.nodeValue = lead + map[t] + trail;
+    }
+  }
+  function setLang(l){
+    if (l === L) return;
+    swapText(l === 'en' ? EN : HT);
+    L = l;
+    document.documentElement.lang = l;
+    document.title = TITLES[l];
+    document.getElementById('langbtn').innerHTML = (l === 'en') ? 'EN / <b>Kreyòl</b>' : '<b>English</b> / Kreyòl';
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+  (function(){
+    document.getElementById('langbtn').innerHTML = '<b>English</b> / Kreyòl';
+    var q = new URLSearchParams(location.search).get('lang'), s = null;
+    try { s = localStorage.getItem('lang'); } catch (e) {}
+    var want = (q === 'en' || q === 'ht') ? q : (s === 'en' ? 'en' : 'ht');
+    if (want === 'en') setLang('en');
+  })();
 </script>
 </body>
 </html>
